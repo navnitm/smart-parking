@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Parking Management</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-row">
+          <div class="brand-mark">P</div>
+          <div>
+            <p class="eyebrow">UrbanFlow</p>
+            <h2>Parking</h2>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <a class="nav-item active" href="#">Overview</a>
+          <a class="nav-item" href="#">Vehicles</a>
+          <a class="nav-item" href="#">Spots</a>
+          <a class="nav-item" href="#">Reports</a>
+          <a class="nav-item" href="#">Settings</a>
+        </nav>
+
+        <div class="sidebar-panel">
+          <span class="mini-label">System status</span>
+          <div class="online-row">
+            <span class="live-dot"></span>
+            <strong id="lot-status">System online</strong>
+          </div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <p class="section-kicker">Operations dashboard</p>
+            <h1>Smart Parking Control</h1>
+          </div>
+          <div class="header-actions">
+            <button class="ghost-btn" type="button">Export</button>
+            <button class="primary-btn" type="button">+ New entry</button>
+          </div>
+        </header>
+
+        <section class="hero-row">
+          <div class="hero-card accent">
+            <span>Fleet capacity</span>
+            <strong id="occupancy-percent">0%</strong>
+            <small>Current occupancy</small>
+          </div>
+          <div class="hero-card">
+            <span>Total spots</span>
+            <strong id="total-spots">0</strong>
+            <small>Available parking bays</small>
+          </div>
+          <div class="hero-card">
+            <span>Available</span>
+            <strong id="available-spots">0</strong>
+            <small>Open spaces now</small>
+          </div>
+          <div class="hero-card">
+            <span>Occupied</span>
+            <strong id="occupied-spots">0</strong>
+            <small>Vehicles on site</small>
+          </div>
+        </section>
+
+        <div class="dashboard-grid">
+          <section class="panel form-panel">
+            <div class="panel-title-row">
+              <h2>Vehicle check-in</h2>
+              <span class="chip success">Live</span>
+            </div>
+            <form id="park-form">
+              <label>
+                License plate
+                <input id="plate-input" type="text" placeholder="e.g. ABC-1234" required />
+              </label>
+
+              <label>
+                Vehicle type
+                <select id="vehicle-type">
+                  <option value="BIKE">Bike</option>
+                  <option value="CAR" selected>Car</option>
+                  <option value="TRUCK">Truck</option>
+                </select>
+              </label>
+
+              <button type="submit">Park vehicle</button>
+            </form>
+
+            <div class="divider"></div>
+
+            <div class="panel-title-row">
+              <h2>Vehicle exit</h2>
+              <span class="chip neutral">Check-out</span>
+            </div>
+            <form id="exit-form" class="compact-form">
+              <label>
+                License plate
+                <input id="exit-plate" type="text" placeholder="Enter plate to exit" required />
+              </label>
+              <button type="submit" class="secondary">Remove vehicle</button>
+            </form>
+
+            <div id="message" class="message" aria-live="polite"></div>
+
+            <div id="receipt-box" class="receipt-box hidden" aria-live="polite">
+              <div class="receipt-header">
+                <h3>Receipt ready</h3>
+                <span id="receipt-id">#000</span>
+              </div>
+              <div id="receipt-summary" class="receipt-summary"></div>
+              <div class="receipt-actions">
+                <button type="button" id="print-receipt">Print</button>
+                <button type="button" id="download-receipt" class="secondary">Download</button>
+                <button type="button" id="email-receipt" class="ghost-btn">Email</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel stats-panel">
+            <div class="panel-title-row">
+              <h2>Capacity overview</h2>
+              <span class="chip warning">Monitoring</span>
+            </div>
+            <div class="capacity-card">
+              <div class="capacity-head">
+                <span>Occupancy rate</span>
+                <strong id="occupancy-rate-text">0%</strong>
+              </div>
+              <div class="capacity-bar">
+                <span id="occupancy-fill"></span>
+              </div>
+            </div>
+
+            <div class="mini-metrics">
+              <div class="metric-box">
+                <span>Bike bays</span>
+                <strong>3</strong>
+              </div>
+              <div class="metric-box">
+                <span>Car bays</span>
+                <strong>5</strong>
+              </div>
+              <div class="metric-box">
+                <span>Truck bays</span>
+                <strong>2</strong>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel full-width">
+            <div class="panel-title-row">
+              <h2>Parking bays</h2>
+              <span class="chip neutral">10 total</span>
+            </div>
+            <div id="spot-grid" class="spot-grid"></div>
+          </section>
+
+          <section class="panel full-width">
+            <div class="panel-title-row">
+              <h2>Current vehicles</h2>
+              <span class="chip success" id="vehicle-count-chip">0 active</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Ticket</th>
+                    <th>Plate</th>
+                    <th>Type</th>
+                    <th>Spot</th>
+                    <th>Entry time</th>
+                    <th>Fee</th>
+                  </tr>
+                </thead>
+                <tbody id="tickets-table"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

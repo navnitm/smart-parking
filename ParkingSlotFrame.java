@@ -28,7 +28,9 @@ public class ParkingSlotFrame extends JFrame {
         );
 
         // Parking information
-        JPanel infoPanel = new JPanel(new GridLayout(2, 2, 20, 10));
+        JPanel infoPanel = new JPanel(
+                new GridLayout(2, 2, 20, 10)
+        );
 
         JLabel locationLabel =
                 new JLabel("Parking Location: City Parking");
@@ -42,7 +44,8 @@ public class ParkingSlotFrame extends JFrame {
         JLabel durationLabel =
                 new JLabel("Duration: 2 Hours");
 
-        Font infoFont = new Font("Arial", Font.PLAIN, 14);
+        Font infoFont =
+                new Font("Arial", Font.PLAIN, 14);
 
         locationLabel.setFont(infoFont);
         dateLabel.setFont(infoFont);
@@ -55,27 +58,40 @@ public class ParkingSlotFrame extends JFrame {
         infoPanel.add(durationLabel);
 
         // Top section
-        JPanel topPanel = new JPanel(new BorderLayout(10, 15));
+        JPanel topPanel =
+                new JPanel(new BorderLayout(10, 15));
 
-        topPanel.add(titleLabel, BorderLayout.NORTH);
-        topPanel.add(infoPanel, BorderLayout.CENTER);
+        topPanel.add(
+                titleLabel,
+                BorderLayout.NORTH
+        );
 
-        mainPanel.add(topPanel, BorderLayout.NORTH);
+        topPanel.add(
+                infoPanel,
+                BorderLayout.CENTER
+        );
+
+        mainPanel.add(
+                topPanel,
+                BorderLayout.NORTH
+        );
 
         // Selected slot label
-        JLabel selectedSlotLabel = new JLabel(
-                "Selected Slot: None",
-                SwingConstants.CENTER
-        );
+        JLabel selectedSlotLabel =
+                new JLabel(
+                        "Selected Slot: None",
+                        SwingConstants.CENTER
+                );
 
         selectedSlotLabel.setFont(
                 new Font("Arial", Font.BOLD, 15)
         );
 
         // Parking slot panel
-        JPanel slotPanel = new JPanel(
-                new GridLayout(4, 5, 15, 15)
-        );
+        JPanel slotPanel =
+                new JPanel(
+                        new GridLayout(4, 5, 15, 15)
+                );
 
         // Parking slot names
         String[] slots = {
@@ -85,58 +101,39 @@ public class ParkingSlotFrame extends JFrame {
                 "D1", "D2", "D3", "D4", "D5"
         };
 
-        // Store currently selected button
+        // Currently selected button
         final JButton[] selectedButton = {null};
 
-        // Create slot buttons
+        // Create parking slot buttons
         for (String slot : slots) {
 
-            JButton slotButton = new JButton(slot);
+            JButton slotButton =
+                    new JButton(slot);
 
             slotButton.setFont(
                     new Font("Arial", Font.BOLD, 16)
             );
 
-            // Occupied slot
-    if (slot.equals("A3") ||
-       slot.equals("B2") ||
-       slot.equals("C4") ||
-       slot.equals("D1")) {
+            // Occupied slots
+            if (slot.equals("A3") ||
+                slot.equals("B2") ||
+                slot.equals("C4") ||
+                slot.equals("D1")) {
 
-    // Occupied slot
-    slotButton.setEnabled(false);
-    slotButton.setBackground(Color.LIGHT_GRAY);
-    slotButton.setForeground(Color.DARK_GRAY);
-    slotButton.setToolTipText("Occupied");
+                slotButton.setEnabled(false);
+                slotButton.setBackground(
+                        Color.LIGHT_GRAY
+                );
+                slotButton.setForeground(
+                        Color.DARK_GRAY
+                );
+                slotButton.setToolTipText(
+                        "Occupied"
+                );
 
-} else {
+            } else {
 
-    // Available slot
-    slotButton.addActionListener(e -> {
-
-        if (selectedButton[0] != null) {
-
-            selectedButton[0].setBackground(
-                    UIManager.getColor("Button.background")
-            );
-
-            selectedButton[0].setForeground(
-                    UIManager.getColor("Button.foreground")
-            );
-        }
-
-        selectedButton[0] = slotButton;
-
-        slotButton.setBackground(Color.BLUE);
-        slotButton.setForeground(Color.WHITE);
-
-        selectedSlotLabel.setText(
-                "Selected Slot: " + slot
-        );
-    });
-}
-
-                // Available slot click action
+                // Available slot
                 slotButton.addActionListener(e -> {
 
                     // Reset previous selection
@@ -156,10 +153,16 @@ public class ParkingSlotFrame extends JFrame {
                     }
 
                     // Select new slot
-                    selectedButton[0] = slotButton;
+                    selectedButton[0] =
+                            slotButton;
 
-                    slotButton.setBackground(Color.BLUE);
-                    slotButton.setForeground(Color.WHITE);
+                    slotButton.setBackground(
+                            Color.BLUE
+                    );
+
+                    slotButton.setForeground(
+                            Color.WHITE
+                    );
 
                     selectedSlotLabel.setText(
                             "Selected Slot: " + slot
@@ -171,9 +174,10 @@ public class ParkingSlotFrame extends JFrame {
         }
 
         // Center section
-        JPanel centerPanel = new JPanel(
-                new BorderLayout(10, 10)
-        );
+        JPanel centerPanel =
+                new JPanel(
+                        new BorderLayout(10, 10)
+                );
 
         centerPanel.add(
                 selectedSlotLabel,
@@ -191,24 +195,29 @@ public class ParkingSlotFrame extends JFrame {
         );
 
         // Bottom panel
-        JPanel bottomPanel = new JPanel(
-                new FlowLayout(
-                        FlowLayout.CENTER,
-                        20,
-                        10
-                )
-        );
+        JPanel bottomPanel =
+                new JPanel(
+                        new FlowLayout(
+                                FlowLayout.CENTER,
+                                20,
+                                10
+                        )
+                );
 
-        JLabel legendLabel = new JLabel(
-                "Available = Selectable    |    Occupied = Not Available"
-        );
+        JLabel legendLabel =
+                new JLabel(
+                        "Available = Selectable    |    Occupied = Not Available"
+                );
 
         legendLabel.setFont(
                 new Font("Arial", Font.PLAIN, 13)
         );
 
-        JButton backButton = new JButton("BACK");
-        JButton continueButton = new JButton("CONTINUE");
+        JButton backButton =
+                new JButton("BACK");
+
+        JButton continueButton =
+                new JButton("CONTINUE");
 
         bottomPanel.add(legendLabel);
         bottomPanel.add(backButton);
@@ -219,10 +228,10 @@ public class ParkingSlotFrame extends JFrame {
                 BorderLayout.SOUTH
         );
 
-        // Add main panel to frame
+        // Add main panel
         add(mainPanel);
 
-        // Show frame
+        // Display frame
         setVisible(true);
     }
 

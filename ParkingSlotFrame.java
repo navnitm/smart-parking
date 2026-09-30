@@ -97,16 +97,44 @@ public class ParkingSlotFrame extends JFrame {
                     new Font("Arial", Font.BOLD, 16)
             );
 
-            // Occupied slots
-            if (slot.equals("A3") ||
-                slot.equals("B2") ||
-                slot.equals("C4") ||
-                slot.equals("D1")) {
+            // Occupied slot
+    if (slot.equals("A3") ||
+       slot.equals("B2") ||
+       slot.equals("C4") ||
+       slot.equals("D1")) {
 
-                slotButton.setText(slot + " - OCCUPIED");
-                slotButton.setEnabled(false);
+    // Occupied slot
+    slotButton.setEnabled(false);
+    slotButton.setBackground(Color.LIGHT_GRAY);
+    slotButton.setForeground(Color.DARK_GRAY);
+    slotButton.setToolTipText("Occupied");
 
-            } else {
+} else {
+
+    // Available slot
+    slotButton.addActionListener(e -> {
+
+        if (selectedButton[0] != null) {
+
+            selectedButton[0].setBackground(
+                    UIManager.getColor("Button.background")
+            );
+
+            selectedButton[0].setForeground(
+                    UIManager.getColor("Button.foreground")
+            );
+        }
+
+        selectedButton[0] = slotButton;
+
+        slotButton.setBackground(Color.BLUE);
+        slotButton.setForeground(Color.WHITE);
+
+        selectedSlotLabel.setText(
+                "Selected Slot: " + slot
+        );
+    });
+}
 
                 // Available slot click action
                 slotButton.addActionListener(e -> {

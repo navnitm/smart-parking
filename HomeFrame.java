@@ -8,7 +8,7 @@ public class HomeFrame extends JFrame {
 
         // 1. Basic Window (Frame) Settings
         setTitle("Smart Parking System");
-        setSize(850, 500);
+        setSize(850, 450);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -24,8 +24,8 @@ public class HomeFrame extends JFrame {
         topPanel.add(titleLabel);
         topPanel.add(descLabel);
 
-        // 3. Grid Section (3 Rows, 2 Columns) for Buttons and Descriptions
-        JPanel centerPanel = new JPanel(new GridLayout(3, 2, 20, 20));
+        // 3. Grid Section (2 Rows, 2 Columns) for Buttons and Descriptions
+        JPanel centerPanel = new JPanel(new GridLayout(2, 2, 20, 20));
 
         // Row 1
         centerPanel.add(new JButton("Find Parking Spot"));
@@ -34,10 +34,6 @@ public class HomeFrame extends JFrame {
         // Row 2
         centerPanel.add(new JButton("My Parking Status"));
         centerPanel.add(new JLabel("Manage your active reservations and vehicles."));
-
-        // Row 3
-        centerPanel.add(new JButton("Parking Slot Blueprint"));
-        centerPanel.add(new JLabel("View interactive map and parking lot layout."));
 
         // 4. Main Panel to hold topPanel and centerPanel with padding around the edges
         JPanel mainPanel = new JPanel(new BorderLayout(20, 30));

@@ -3,104 +3,61 @@ import java.awt.*;
 
 public class ParkingStatusFrame extends JFrame {
 
-    // Constructor
     public ParkingStatusFrame() {
-
-        // Frame settings
+        // 1. Basic Window Setup
         setTitle("My Parking Status");
-        setSize(800, 550);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(850, 600);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Main panel
+        // 2. Master Canvas with Margins
         JPanel mainPanel = new JPanel(new BorderLayout(20, 20));
-        mainPanel.setBorder(
-                BorderFactory.createEmptyBorder(30, 50, 30, 50)
-        );
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
 
-        // Title
-        JLabel titleLabel = new JLabel(
-                "MY PARKING STATUS",
-                SwingConstants.CENTER
-        );
+        // 3. Title Section (North)
+        JLabel titleLabel = new JLabel("MY PARKING STATUS", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
+        mainPanel.add(titleLabel, BorderLayout.NORTH);
 
-        // Subtitle
-        JLabel subtitleLabel = new JLabel(
-                "View the details of your currently parked vehicle.",
-                SwingConstants.CENTER
-        );
-        subtitleLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        // 4. Search Bar Section
+        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        searchPanel.add(new JLabel("Vehicle / Booking ID:"));
+        searchPanel.add(new JTextField(20));
+        searchPanel.add(new JButton("CHECK STATUS"));
 
-        // Heading panel
-        JPanel headingPanel = new JPanel(new GridLayout(2, 1, 5, 5));
-        headingPanel.add(titleLabel);
-        headingPanel.add(subtitleLabel);
+        // 5. Active Reservation Status Card
+        JPanel statusCard = new JPanel(new BorderLayout(15, 10));
+        statusCard.setBorder(BorderFactory.createTitledBorder("Active Booking Details"));
 
-        // Vehicle information labels
-        JLabel vehicleNumberLabel = new JLabel("Vehicle Number:");
-        JLabel vehicleTypeLabel = new JLabel("Vehicle Type:");
-        JLabel parkingAreaLabel = new JLabel("Parking Area:");
-        JLabel slotNumberLabel = new JLabel("Parking Slot:");
-        JLabel entryTimeLabel = new JLabel("Entry Time:");
-        JLabel parkingStatusLabel = new JLabel("Status:");
+        // Vehicle info listed vertically
+        JPanel infoPanel = new JPanel(new GridLayout(4, 1, 5, 5));
+        infoPanel.add(new JLabel("Vehicle No: KL-02-AB-1234"));
+        infoPanel.add(new JLabel("Location: City Parking Centre, Kollam"));
+        infoPanel.add(new JLabel("Duration: 2 Hours (Slot A-05)"));
+        infoPanel.add(new JLabel("Total Fee: ₹100"));
 
-        // Example information
-        JLabel vehicleNumber = new JLabel("KL-02-AB-1234");
-        JLabel vehicleType = new JLabel("Car");
-        JLabel parkingArea = new JLabel("Parking Area A");
-        JLabel slotNumber = new JLabel("P-05");
-        JLabel entryTime = new JLabel("10:30 AM");
-        JLabel parkingStatus = new JLabel("PARKED");
+        // Action button on the right side of the card
+        JButton cancelButton = new JButton("CANCEL RESERVATION");
 
-        // Information panel
-        JPanel informationPanel = new JPanel(
-                new GridLayout(6, 2, 15, 15)
-        );
+        statusCard.add(infoPanel, BorderLayout.CENTER);
+        statusCard.add(cancelButton, BorderLayout.EAST);
 
-        informationPanel.add(vehicleNumberLabel);
-        informationPanel.add(vehicleNumber);
+        // 6. Middle Section Assembly (Search + Status Card)
+        JPanel centerPanel = new JPanel(new BorderLayout(10, 20));
+        centerPanel.add(searchPanel, BorderLayout.NORTH);
+        centerPanel.add(statusCard, BorderLayout.CENTER);
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
 
-        informationPanel.add(vehicleTypeLabel);
-        informationPanel.add(vehicleType);
+        // 7. Bottom Section (Back Button)
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.add(new JButton("BACK"));
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-        informationPanel.add(parkingAreaLabel);
-        informationPanel.add(parkingArea);
-
-        informationPanel.add(slotNumberLabel);
-        informationPanel.add(slotNumber);
-
-        informationPanel.add(entryTimeLabel);
-        informationPanel.add(entryTime);
-
-        informationPanel.add(parkingStatusLabel);
-        informationPanel.add(parkingStatus);
-
-        // Buttons
-        JButton viewSlotButton = new JButton("View Parking Slot");
-        JButton backButton = new JButton("Back");
-
-        // Button panel
-        JPanel buttonPanel = new JPanel(
-                new FlowLayout(FlowLayout.CENTER, 20, 10)
-        );
-
-        buttonPanel.add(viewSlotButton);
-        buttonPanel.add(backButton);
-
-        // Add components to main panel
-        mainPanel.add(headingPanel, BorderLayout.NORTH);
-        mainPanel.add(informationPanel, BorderLayout.CENTER);
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-
-        // Add main panel to frame
+        // 8. Mount Master Canvas to Frame and Show
         add(mainPanel);
-
-        // Make frame visible
         setVisible(true);
     }
 
-    // Main method
     public static void main(String[] args) {
         new ParkingStatusFrame();
     }

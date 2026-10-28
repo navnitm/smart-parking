@@ -1,53 +1,67 @@
+
 import javax.swing.*;
 import java.awt.*;
 
 public class HomeFrame extends JFrame {
 
-    // Constructor: This runs when the window is created
     public HomeFrame() {
 
-        // 1. Basic Window (Frame) Settings
+        // Basic window settings
         setTitle("Smart Parking System");
         setSize(850, 450);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // 2. Heading Section (Title + Subtitle)
-        JLabel titleLabel = new JLabel("SMART PARKING SYSTEM", SwingConstants.CENTER);
+        // Heading
+        JLabel titleLabel = new JLabel(
+                "SMART PARKING SYSTEM", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
 
-        JLabel descLabel = new JLabel("Find and manage parking spaces easily.", SwingConstants.CENTER);
+        JLabel descLabel = new JLabel(
+                "Find and manage parking spaces easily.",
+                SwingConstants.CENTER);
         descLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 
-        // Panel to stack title and subtitle (2 rows, 1 column)
         JPanel topPanel = new JPanel(new GridLayout(2, 1, 5, 5));
         topPanel.add(titleLabel);
         topPanel.add(descLabel);
 
-        // 3. Grid Section (2 Rows, 2 Columns) for Buttons and Descriptions
+        // Buttons and descriptions
         JPanel centerPanel = new JPanel(new GridLayout(2, 2, 20, 20));
 
-        // Row 1
-        centerPanel.add(new JButton("Find Parking Spot"));
-        centerPanel.add(new JLabel("Search and reserve available parking spots."));
+        JButton findButton = new JButton("Find Parking Spot");
+        JButton statusButton = new JButton("My Parking Status");
 
-        // Row 2
-        centerPanel.add(new JButton("My Parking Status"));
-        centerPanel.add(new JLabel("Manage your active reservations and vehicles."));
+        centerPanel.add(findButton);
+        centerPanel.add(new JLabel(
+                "Search and reserve available parking spots."));
 
-        // 4. Main Panel to hold topPanel and centerPanel with padding around the edges
+        centerPanel.add(statusButton);
+        centerPanel.add(new JLabel(
+                "Manage your active reservations and vehicles."));
+
+        // Find Parking button navigation
+        findButton.addActionListener(e -> {
+            new FindParkingFrame();
+        });
+
+        // Parking Status button navigation
+        statusButton.addActionListener(e -> {
+            new ParkingStatusFrame();
+        });
+
+        // Main layout
         JPanel mainPanel = new JPanel(new BorderLayout(20, 30));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 50, 40, 50));
+        mainPanel.setBorder(
+                BorderFactory.createEmptyBorder(40, 50, 40, 50));
 
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
 
-        // 5. Add Main Panel to the Frame and show it
         add(mainPanel);
         setVisible(true);
     }
 
-    // Main Method: Program starting point
     public static void main(String[] args) {
         new HomeFrame();
     }

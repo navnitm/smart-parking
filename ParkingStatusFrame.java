@@ -78,68 +78,7 @@ public class ParkingStatusFrame extends JFrame {
     }
 
     // Search booking in MySQL
-    private void checkBooking() {
-
-        String search = searchField.getText().trim();
-
-        if (search.isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                    "Enter a vehicle number or booking ID.");
-            return;
-        }
-
-        String sql = "SELECT * FROM bookings "
-                + "WHERE vehicle_number = ?";
-
-        try (Connection con = DBConnection.getConnection()) {
-
-            // Search by vehicle number
-            try (PreparedStatement ps = con.prepareStatement(sql)) {
-
-                ps.setString(1, search);
-
-                try (ResultSet rs = ps.executeQuery()) {
-
-                    if (rs.next()) {
-                        showBooking(rs);
-                        return;
-                    }
-                }
-            }
-
-            // If not found, search by booking ID
-            try {
-                int id = Integer.parseInt(search);
-
-                sql = "SELECT * FROM bookings WHERE id = ?";
-
-                try (PreparedStatement ps = con.prepareStatement(sql)) {
-
-                    ps.setInt(1, id);
-
-                    try (ResultSet rs = ps.executeQuery()) {
-
-                        if (rs.next()) {
-                            showBooking(rs);
-                            return;
-                        }
-                    }
-                }
-
-            } catch (NumberFormatException ex) {
-                // Search text was not a numeric booking ID
-            }
-
-            clearDetails();
-
-            JOptionPane.showMessageDialog(this,
-                    "No booking found.");
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this,
-                    "Error: " + ex.getMessage());
-        }
-    }
+    
 
     // Display booking details
     private void showBooking(ResultSet rs) throws Exception {

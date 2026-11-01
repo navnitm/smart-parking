@@ -109,4 +109,3 @@ public class FindParkingFrame extends JFrame {
         new FindParkingFrame();
     }
 }
-
